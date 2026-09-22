@@ -28,14 +28,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-theme="cobalt" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" data-theme="gold" className={`${inter.variable} h-full antialiased`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var theme = localStorage.getItem('skybazz_theme') || 'cobalt';
-                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.removeItem('skybazz_theme');
+                document.documentElement.setAttribute('data-theme', 'gold');
               } catch (e) {}
             `,
           }}

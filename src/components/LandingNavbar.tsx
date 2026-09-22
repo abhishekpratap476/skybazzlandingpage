@@ -2,15 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useTheme } from "@/context/ThemeContext";
-import { ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function LandingNavbar() {
   const { user, signOut } = useAuth();
-  const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSectionName, setCurrentSectionName] = useState("OVERVIEW");
@@ -128,44 +126,7 @@ export default function LandingNavbar() {
           {/* Right: Theme Switcher + Waitlist CTA */}
           <div className={`flex items-center gap-2 sm:gap-3 transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             
-            {/* Dual Theme Switcher */}
-            <div
-              className={`flex items-center p-0.5 rounded-full border transition-all duration-300 ${
-                !isScrolled
-                  ? "border-white/20 bg-black/35 backdrop-blur-md"
-                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)]"
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() => setTheme("cobalt")}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
-                  theme === "cobalt"
-                    ? "bg-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.6)]"
-                    : "text-slate-400 hover:text-white"
-                }`}
-                title="Option A: Aero Titanium & Electric Cobalt"
-                aria-label="Switch to Aero Cobalt theme"
-              >
-                <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                <span className="hidden min-[450px]:inline">AERO</span>
-              </button>
 
-              <button
-                type="button"
-                onClick={() => setTheme("gold")}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
-                  theme === "gold"
-                    ? "bg-[#D4AF37] text-black shadow-[0_0_12px_rgba(212,175,55,0.6)]"
-                    : "text-slate-400 hover:text-white"
-                }`}
-                title="Option B: Obsidian & Champagne Gold"
-                aria-label="Switch to Champagne Gold theme"
-              >
-                <Crown className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                <span className="hidden min-[450px]:inline">GOLD</span>
-              </button>
-            </div>
 
             <Link
               id="nav-waitlist-btn"
@@ -199,33 +160,7 @@ export default function LandingNavbar() {
             </div>
 
             <div className="flex flex-1 flex-col items-center justify-center py-6 px-4 gap-5 sm:gap-6 my-auto">
-              {/* Drawer Theme Switcher */}
-              <div className="flex items-center p-1 rounded-full border border-[var(--border-subtle)] bg-black/40 backdrop-blur-md mb-2">
-                <button
-                  type="button"
-                  onClick={() => setTheme("cobalt")}
-                  className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 ${
-                    theme === "cobalt"
-                      ? "bg-[#2563EB] text-white shadow-[0_0_14px_rgba(37,99,235,0.7)]"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  <span>AERO COBALT</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setTheme("gold")}
-                  className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 ${
-                    theme === "gold"
-                      ? "bg-[#D4AF37] text-black shadow-[0_0_14px_rgba(212,175,55,0.7)]"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <Crown className="w-3.5 h-3.5" />
-                  <span>CHAMPAGNE GOLD</span>
-                </button>
-              </div>
+
 
               <nav className="flex flex-col items-center gap-4 sm:gap-5 text-center w-full max-w-sm">
                 {sectionsList.map((sec, index) => (

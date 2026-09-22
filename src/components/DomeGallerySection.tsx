@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import DomeGallery from "./DomeGallery";
-
 export default function DomeGallerySection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -88,7 +87,7 @@ export default function DomeGallerySection() {
           autoRotateSpeed={0.8}
           imageBorderRadius="14px"
           openedImageBorderRadius="20px"
-          overlayBlurColor="rgba(10,10,14,0.88)"
+          overlayBlurColor="rgba(250, 249, 246, 0.92)"
         />
       </div>
     </div>

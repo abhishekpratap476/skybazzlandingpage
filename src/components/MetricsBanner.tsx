@@ -3,10 +3,7 @@
 import React, { useState, useEffect } from "react";
 import InteractiveParticles from "@/components/InteractiveParticles";
 import { supabase } from "@/lib/supabase";
-import { useTheme } from "@/context/ThemeContext";
-
 export default function MetricsBanner() {
-  const { theme } = useTheme();
   const [waitlistCount, setWaitlistCount] = useState<number>(1);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -37,12 +34,10 @@ export default function MetricsBanner() {
     return () => window.removeEventListener("waitlist-updated", handleUpdate);
   }, []);
 
-  const particleColor = theme === "gold" ? "#E5C07B" : "#38BDF8";
-
   return (
     <section
       id="metrics-section"
-      className="relative z-10 w-full h-[580px] sm:h-[650px] md:h-[720px] min-h-[520px] flex items-center justify-center overflow-hidden bg-[var(--canvas-bg)] transition-colors duration-400"
+      className="relative z-10 w-full h-[580px] sm:h-[650px] md:h-[720px] min-h-[520px] flex items-center justify-center overflow-hidden bg-[var(--canvas-bg)]"
     >
       {/* Subtle ambient lighting matching active theme */}
       <div
@@ -53,11 +48,10 @@ export default function MetricsBanner() {
       />
 
       <InteractiveParticles
-        key={theme}
         waitlistCount={waitlistCount}
         waitlistLabel="IN WAITING LIST"
         background="transparent"
-        color={particleColor}
+        color="#B89028"
         size={isMobile ? 2.2 : 1.6}
         maxDimension={isMobile ? 140 : 280}
         randomness={isMobile ? 1.4 : 1.8}

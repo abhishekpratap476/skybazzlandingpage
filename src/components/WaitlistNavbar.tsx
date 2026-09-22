@@ -4,11 +4,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Sparkles, Zap, Crown } from "lucide-react";
-import { useTheme } from "@/context/ThemeContext";
+import { ArrowLeft } from "lucide-react";
 
 export default function WaitlistNavbar() {
-  const { theme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -52,35 +50,7 @@ export default function WaitlistNavbar() {
 
         {/* ── RIGHT: Theme Switcher & Home link ── */}
         <div className="flex items-center gap-2 sm:gap-4">
-          <div className="flex items-center p-0.5 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-            <button
-              type="button"
-              onClick={() => setTheme("cobalt")}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
-                theme === "cobalt"
-                  ? "bg-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.6)]"
-                  : "text-slate-400 hover:text-white"
-              }`}
-              title="Aero Titanium & Electric Cobalt"
-            >
-              <Zap className="w-3 h-3" />
-              <span className="hidden min-[400px]:inline">AERO</span>
-            </button>
 
-            <button
-              type="button"
-              onClick={() => setTheme("gold")}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
-                theme === "gold"
-                  ? "bg-[#D4AF37] text-black shadow-[0_0_12px_rgba(212,175,55,0.6)]"
-                  : "text-slate-400 hover:text-white"
-              }`}
-              title="Obsidian & Champagne Gold"
-            >
-              <Crown className="w-3 h-3" />
-              <span className="hidden min-[400px]:inline">GOLD</span>
-            </button>
-          </div>
 
           <Link
             href="/"
