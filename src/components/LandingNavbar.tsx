@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
+import { ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function LandingNavbar() {
   const { user, signOut } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSectionName, setCurrentSectionName] = useState("OVERVIEW");
@@ -60,7 +62,7 @@ export default function LandingNavbar() {
             ? "w-full h-14 sm:h-16 bg-transparent border-transparent shadow-none px-3.5 sm:px-8"
             : !isScrolled
             ? "w-full h-14 sm:h-16 bg-transparent border-b border-transparent shadow-none backdrop-blur-none px-3.5 sm:px-8 md:px-12"
-            : "w-[94%] max-w-7xl mt-2 sm:mt-4 h-12 sm:h-14 border border-slate-200/80 bg-white/92 px-3 sm:px-6 shadow-lg shadow-slate-200/50 backdrop-blur-2xl rounded-2xl"
+            : "w-[94%] max-w-7xl mt-2 sm:mt-4 h-12 sm:h-14 border border-[var(--border-subtle)] bg-[var(--surface-card)] px-3 sm:px-6 shadow-2xl backdrop-blur-2xl rounded-2xl"
           }`}
         >
           {/* Left: Menu + section indicator */}
@@ -70,24 +72,24 @@ export default function LandingNavbar() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full border transition-all duration-300 text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.18em] cursor-pointer
                 ${mobileMenuOpen
-                  ? "border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-900 shadow-xs"
+                  ? "border-[var(--border-hover)] bg-[var(--surface-elevated)] text-[var(--text-primary)] shadow-sm"
                   : !isScrolled
                   ? "border-white/20 bg-black/30 hover:bg-black/50 text-white backdrop-blur-md"
-                  : "border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] hover:border-[var(--border-hover)] text-[var(--text-primary)]"
                 }`}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
               <div className="flex h-3.5 w-4 flex-col justify-between">
-                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "bg-slate-900 translate-y-[6px] rotate-45" : !isScrolled ? "bg-white" : "bg-slate-800"}`} />
-                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : !isScrolled ? "bg-white" : "bg-slate-800"}`} />
-                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "bg-slate-900 -translate-y-[6px] -rotate-45" : !isScrolled ? "bg-white" : "bg-slate-800"}`} />
+                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "bg-[var(--accent-primary)] translate-y-[6px] rotate-45" : !isScrolled ? "bg-white" : "bg-[var(--text-primary)]"}`} />
+                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : !isScrolled ? "bg-white" : "bg-[var(--text-primary)]"}`} />
+                <span className={`h-0.5 w-full transition-all duration-300 ${mobileMenuOpen ? "bg-[var(--accent-primary)] -translate-y-[6px] -rotate-45" : !isScrolled ? "bg-white" : "bg-[var(--text-primary)]"}`} />
               </div>
               <span>{mobileMenuOpen ? "Close" : "Menu"}</span>
             </button>
 
             {!mobileMenuOpen && (
               <>
-                <span className={`hidden sm:inline-block h-3 w-px transition-colors duration-300 ${!isScrolled ? "bg-white/25" : "bg-slate-300"}`} />
+                <span className={`hidden sm:inline-block h-3 w-px transition-colors duration-300 ${!isScrolled ? "bg-white/25" : "bg-[var(--border-stroke)]"}`} />
 
                 {/* Animated section label */}
                 <div className="hidden sm:flex relative overflow-hidden items-center h-6">
@@ -99,7 +101,7 @@ export default function LandingNavbar() {
                       exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.3em] select-none ${
-                        !isScrolled ? "text-blue-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "text-[#0071e3]"
+                        !isScrolled ? "text-[var(--accent-secondary)] drop-shadow-[0_0_10px_var(--accent-glow)]" : "text-[var(--accent-primary)]"
                       }`}
                     >
                       {currentSectionName}
@@ -116,26 +118,66 @@ export default function LandingNavbar() {
               <Link href="/" className="flex items-center gap-1.5 sm:gap-2.5 group">
                 <Image src="/Skybazz2-removebg-preview.png" alt="Skybazz Logo" width={28} height={28} priority
                   className="h-5 sm:h-7 md:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm" />
-                <span className="hidden min-[380px]:inline text-xs sm:text-sm md:text-base font-extrabold tracking-[0.2em] sm:tracking-[0.22em] text-[#1d1d1f] select-none transition-all duration-300 group-hover:tracking-[0.3em] uppercase">
+                <span className="hidden min-[380px]:inline text-xs sm:text-sm md:text-base font-extrabold tracking-[0.2em] sm:tracking-[0.22em] text-[var(--text-primary)] select-none transition-all duration-300 group-hover:tracking-[0.3em] uppercase">
                   SKYBAZZ
                 </span>
               </Link>
             </div>
           </div>
 
-          {/* Right: Waitlist CTA (hidden when mobile menu drawer is open) */}
-          <div className={`flex items-center gap-1.5 sm:gap-2.5 transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          {/* Right: Theme Switcher + Waitlist CTA */}
+          <div className={`flex items-center gap-2 sm:gap-3 transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+            
+            {/* Dual Theme Switcher */}
+            <div
+              className={`flex items-center p-0.5 rounded-full border transition-all duration-300 ${
+                !isScrolled
+                  ? "border-white/20 bg-black/35 backdrop-blur-md"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)]"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => setTheme("cobalt")}
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
+                  theme === "cobalt"
+                    ? "bg-[#2563EB] text-white shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="Option A: Aero Titanium & Electric Cobalt"
+                aria-label="Switch to Aero Cobalt theme"
+              >
+                <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                <span className="hidden min-[450px]:inline">AERO</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setTheme("gold")}
+                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider transition-all duration-300 cursor-pointer ${
+                  theme === "gold"
+                    ? "bg-[#D4AF37] text-black shadow-[0_0_12px_rgba(212,175,55,0.6)]"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="Option B: Obsidian & Champagne Gold"
+                aria-label="Switch to Champagne Gold theme"
+              >
+                <Crown className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                <span className="hidden min-[450px]:inline">GOLD</span>
+              </button>
+            </div>
+
             <Link
               id="nav-waitlist-btn"
               href="/waitlist"
-              className={`inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.12em] sm:tracking-[0.15em] transition-all duration-300 hover:scale-105 shadow-sm
+              className={`inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.12em] sm:tracking-[0.15em] transition-all duration-300 hover:scale-105 shadow-sm
                 ${!isScrolled
                   ? "bg-white/15 hover:bg-white/25 border border-white/30 text-white backdrop-blur-md"
-                  : "neon-btn"
+                  : "skybazz-cta"
                 }`}
               title="Join the Early Access Waiting List"
             >
-              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-200" />
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Waitlist</span>
             </Link>
           </div>
@@ -150,13 +192,41 @@ export default function LandingNavbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-white/96 backdrop-blur-2xl overflow-y-auto"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-[var(--surface-elevated)]/98 backdrop-blur-3xl overflow-y-auto text-[var(--text-primary)]"
           >
             <div className="w-full px-6 pt-20 sm:pt-28 max-w-7xl mx-auto">
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+              <div className="h-px w-full section-divider" />
             </div>
 
             <div className="flex flex-1 flex-col items-center justify-center py-6 px-4 gap-5 sm:gap-6 my-auto">
+              {/* Drawer Theme Switcher */}
+              <div className="flex items-center p-1 rounded-full border border-[var(--border-subtle)] bg-black/40 backdrop-blur-md mb-2">
+                <button
+                  type="button"
+                  onClick={() => setTheme("cobalt")}
+                  className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 ${
+                    theme === "cobalt"
+                      ? "bg-[#2563EB] text-white shadow-[0_0_14px_rgba(37,99,235,0.7)]"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>AERO COBALT</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTheme("gold")}
+                  className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 ${
+                    theme === "gold"
+                      ? "bg-[#D4AF37] text-black shadow-[0_0_14px_rgba(212,175,55,0.7)]"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Crown className="w-3.5 h-3.5" />
+                  <span>CHAMPAGNE GOLD</span>
+                </button>
+              </div>
+
               <nav className="flex flex-col items-center gap-4 sm:gap-5 text-center w-full max-w-sm">
                 {sectionsList.map((sec, index) => (
                   <motion.button
@@ -166,13 +236,13 @@ export default function LandingNavbar() {
                     transition={{ delay: index * 0.05, duration: 0.35, ease: [0.16,1,0.3,1] }}
                     onClick={() => scrollToSection(sec.id)}
                     className={`text-xl sm:text-2xl font-black tracking-[0.18em] transition-colors cursor-pointer py-1
-                      ${currentSectionName === sec.name ? "text-[#0071e3]" : "text-slate-800 hover:text-[#0071e3]"}`}
+                      ${currentSectionName === sec.name ? "text-[var(--accent-primary)]" : "text-[var(--text-secondary)] hover:text-[var(--accent-primary)]"}`}
                   >
                     {sec.name}
                   </motion.button>
                 ))}
 
-                <div className="h-px w-28 bg-slate-200 my-1" />
+                <div className="h-px w-28 section-divider my-1" />
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -183,9 +253,9 @@ export default function LandingNavbar() {
                   <Link
                     href="/waitlist"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full neon-btn font-extrabold text-xs tracking-wider shadow-lg"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full skybazz-cta font-extrabold text-xs tracking-wider shadow-lg"
                   >
-                    <Sparkles className="w-4 h-4 text-blue-200" />
+                    <Sparkles className="w-4 h-4" />
                     <span>JOIN WAITING LIST</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -193,7 +263,7 @@ export default function LandingNavbar() {
               </nav>
             </div>
 
-            <div className="w-full px-6 pb-8 pt-4 text-center text-[11px] text-slate-400 font-bold tracking-widest">
+            <div className="w-full px-6 pb-8 pt-4 text-center text-[11px] text-[var(--text-muted)] font-bold tracking-widest">
               © {new Date().getFullYear()} SKYBAZZ LOGISTICS CORP.
             </div>
           </motion.div>

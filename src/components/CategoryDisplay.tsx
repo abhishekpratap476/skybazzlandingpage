@@ -99,11 +99,11 @@ export default function CategoryDisplay() {
     <section
       ref={sectionRef}
       id="categories-section"
-      className="relative w-full flex flex-col justify-center py-16 md:py-24 bg-[#f5f5f7] overflow-hidden"
+      className="relative w-full flex flex-col justify-center py-16 md:py-24 bg-[var(--canvas-bg)] text-[var(--text-primary)] overflow-hidden transition-colors duration-400"
     >
       {/* Light ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full pointer-events-none opacity-20"
-        style={{ background: "radial-gradient(ellipse, rgba(0,113,227,0.15) 0%, transparent 65%)" }} />
+        style={{ background: "radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%)" }} />
 
       <div className="absolute top-0 inset-x-0 h-px section-divider" />
 
@@ -117,19 +117,19 @@ export default function CategoryDisplay() {
       >
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-[#0071e3]/60" />
-            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.4em] uppercase text-[#0071e3]">
+            <div className="h-px w-8 bg-[var(--accent-primary)]/60" />
+            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.4em] uppercase text-[var(--accent-primary)]">
               Curated Collections
             </span>
           </div>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1d1d1f] uppercase">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] uppercase">
             Categories
           </h2>
         </div>
 
         <Link
           href="/waitlist"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white hover:bg-[#0071e3] hover:border-[#0071e3] text-slate-600 hover:text-white transition-all duration-300 shadow-sm group cursor-pointer shrink-0"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] hover:bg-[var(--accent-primary)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] hover:text-white transition-all duration-300 shadow-sm group cursor-pointer shrink-0"
           aria-label="View All Categories"
         >
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -155,21 +155,13 @@ export default function CategoryDisplay() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5 z-10 flex flex-col justify-end pointer-events-none">
                 {item.tag && (
-                  <span className="text-[9px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-blue-400 mb-1 block truncate">
+                  <span className="skybazz-pill text-[9px] sm:text-[10px] mb-1.5 w-max">
                     {item.tag}
                   </span>
                 )}
-                {/* <h3 className="text-xs sm:text-base md:text-lg font-extrabold text-white uppercase tracking-wider line-clamp-1">
-                  {item.name}
-                </h3>
-                {item.subtitle && (
-                  <p className="hidden sm:block text-[11px] sm:text-xs text-white/75 line-clamp-2 font-medium mt-1 leading-snug">
-                    {item.subtitle}
-                  </p>
-                )} */}
               </div>
               <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-10">
-                <div className="p-1.5 sm:p-2 rounded-xl bg-black/50 backdrop-blur-md text-white group-hover:bg-blue-600 transition-all duration-300">
+                <div className="p-1.5 sm:p-2 rounded-xl bg-black/60 backdrop-blur-md text-white group-hover:bg-[var(--accent-primary)] transition-all duration-300 border border-white/10">
                   <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </div>

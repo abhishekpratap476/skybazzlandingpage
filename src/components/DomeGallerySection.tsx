@@ -46,13 +46,13 @@ export default function DomeGallerySection() {
     <div
       ref={sectionRef}
       id="trending-section"
-      className="relative w-full h-[70vh] sm:h-[80vh] md:h-screen min-h-[460px] bg-[#f5f5f7] text-[#1d1d1f] border-t border-slate-200/60 flex flex-col justify-between overflow-hidden transition-colors duration-300"
+      className="relative w-full h-[70vh] sm:h-[80vh] md:h-screen min-h-[460px] bg-[var(--canvas-bg)] text-[var(--text-primary)] border-t border-[var(--border-subtle)] flex flex-col justify-between overflow-hidden transition-colors duration-400"
     >
       {/* Ambient glows */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none opacity-20"
-        style={{ background: "radial-gradient(circle, rgba(0,113,227,0.15) 0%, transparent 70%)" }} />
+        style={{ background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)" }} />
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none opacity-15"
-        style={{ background: "radial-gradient(circle, rgba(88,86,214,0.12) 0%, transparent 70%)" }} />
+        style={{ background: "radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 70%)" }} />
 
       {/* Floating header */}
       <div
@@ -60,18 +60,15 @@ export default function DomeGallerySection() {
           }`}
       >
         <div className="flex items-center justify-center gap-3 mb-2">
-          <div className="h-px w-8 bg-[#0071e3]/60" />
-          <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.4em] uppercase text-[#0071e3]">
+          <div className="h-px w-8 bg-[var(--accent-primary)]/60" />
+          <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.4em] uppercase text-[var(--accent-primary)]">
             Interactive Showcase
           </span>
-          <div className="h-px w-8 bg-[#0071e3]/60" />
+          <div className="h-px w-8 bg-[var(--accent-primary)]/60" />
         </div>
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase text-[#1d1d1f]">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase text-[var(--text-primary)]">
           Featured Product Gallery
         </h2>
-        {/* <p className="text-xs sm:text-sm text-[#86868b] font-medium max-w-xl mx-auto">
-          Drag and explore verified supply items and OEM product lines in an interactive 3D sphere.
-        </p> */}
       </div>
 
       {/* 3D Dome Gallery */}
@@ -91,7 +88,7 @@ export default function DomeGallerySection() {
           autoRotateSpeed={0.8}
           imageBorderRadius="14px"
           openedImageBorderRadius="20px"
-          overlayBlurColor="rgba(245,245,247,0.85)"
+          overlayBlurColor="rgba(10,10,14,0.88)"
         />
       </div>
     </div>

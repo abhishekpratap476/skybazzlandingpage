@@ -404,12 +404,12 @@ export default function WaitlistForm() {
                   <div className="space-y-1 text-left">
                     <label
                       htmlFor="waitlist-name"
-                      className="block text-xs font-bold text-slate-700 tracking-wide"
+                      className="block text-xs font-bold text-[var(--text-primary)] tracking-wide"
                     >
-                      Full Name <span className="text-[#0071e3]">*</span>
+                      Full Name <span className="text-[var(--accent-primary)]">*</span>
                     </label>
                     <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
                       <input
                         id="waitlist-name"
                         type="text"
@@ -422,7 +422,7 @@ export default function WaitlistForm() {
                           if (state === "error") setState("idle");
                         }}
                         placeholder="e.g. Abhishek Pratap"
-                        className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0071e3]/20 focus:border-[#0071e3] transition-all shadow-xs"
+                        className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-glow)] focus:border-[var(--border-hover)] transition-all shadow-xs"
                       />
                     </div>
                   </div>
@@ -431,12 +431,12 @@ export default function WaitlistForm() {
                   <div className="space-y-1 text-left">
                     <label
                       htmlFor="waitlist-email"
-                      className="block text-xs font-bold text-slate-700 tracking-wide"
+                      className="block text-xs font-bold text-[var(--text-primary)] tracking-wide"
                     >
-                      Work or Personal Email <span className="text-[#0071e3]">*</span>
+                      Work or Personal Email <span className="text-[var(--accent-primary)]">*</span>
                     </label>
                     <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
                       <input
                         ref={emailInputRef}
                         id="waitlist-email"
@@ -450,7 +450,7 @@ export default function WaitlistForm() {
                           if (state === "error") setState("idle");
                         }}
                         placeholder="name@company.com"
-                        className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0071e3]/20 focus:border-[#0071e3] transition-all shadow-xs"
+                        className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-glow)] focus:border-[var(--border-hover)] transition-all shadow-xs"
                       />
                     </div>
                   </div>
@@ -458,11 +458,11 @@ export default function WaitlistForm() {
                   {/* Phone & Location */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
                     <div className="space-y-1">
-                      <label htmlFor="waitlist-phone" className="block text-xs font-bold text-slate-700">
+                      <label htmlFor="waitlist-phone" className="block text-xs font-bold text-[var(--text-primary)]">
                         Phone Number
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
                         <input
                           id="waitlist-phone"
                           type="tel"
@@ -471,17 +471,17 @@ export default function WaitlistForm() {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 98765 43210"
-                          className="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0071e3]/20 focus:border-[#0071e3] transition-all shadow-xs"
+                          className="w-full pl-10 pr-3 py-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-glow)] focus:border-[var(--border-hover)] transition-all shadow-xs"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <label htmlFor="waitlist-country" className="block text-xs font-bold text-slate-700">
+                      <label htmlFor="waitlist-country" className="block text-xs font-bold text-[var(--text-primary)]">
                         Country / City
                       </label>
                       <div className="relative">
-                        <Globe2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Globe2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
                         <input
                           id="waitlist-country"
                           type="text"
@@ -489,7 +489,7 @@ export default function WaitlistForm() {
                           value={country}
                           onChange={(e) => setCountry(e.target.value)}
                           placeholder="India"
-                          className="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0071e3]/20 focus:border-[#0071e3] transition-all shadow-xs"
+                          className="w-full pl-10 pr-3 py-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-glow)] focus:border-[var(--border-hover)] transition-all shadow-xs"
                         />
                       </div>
                     </div>
@@ -502,7 +502,7 @@ export default function WaitlistForm() {
                       onClick={handleNextStep}
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#0071e3] via-[#0077ed] to-[#34aadc] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#0071e3]/25 flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-[#0071e3]/30 transition-all cursor-pointer"
+                      className="w-full py-4 px-6 rounded-xl skybazz-cta font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all cursor-pointer"
                     >
                       <span>Next: Select Preferred Tier</span>
                       <ArrowRight className="w-4 h-4" />
@@ -511,7 +511,7 @@ export default function WaitlistForm() {
                     <button
                       type="submit"
                       disabled={state === "loading"}
-                      className="text-xs text-slate-400 hover:text-slate-700 transition-colors py-1 cursor-pointer"
+                      className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors py-1 cursor-pointer"
                     >
                       or Quick-Join standard list with just email →
                     </button>
@@ -528,15 +528,15 @@ export default function WaitlistForm() {
                   className="space-y-5 text-left"
                 >
                   <div>
-                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mb-1">
+                    <h2 className="text-2xl font-black text-[var(--text-primary)] tracking-tight mb-1">
                       Select Your Preferred Tier
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
                       Choose the category or membership tier that matches what you plan to source or access.
                     </p>
                   </div>
 
-                  <p className="text-slate-500 text-xs text-center font-medium pt-1">
+                  <p className="text-[var(--text-muted)] text-xs text-center font-medium pt-1">
                     Choose the category that best describes your product
                   </p>
 
@@ -558,12 +558,12 @@ export default function WaitlistForm() {
                           className={cn(
                             "relative flex flex-col items-center text-center p-3 sm:p-4 rounded-2xl border cursor-pointer transition-all duration-200 group overflow-hidden last:col-span-2 sm:last:col-span-1",
                             isSelected
-                              ? "ring-2 ring-[#0071e3]/40 shadow-md shadow-[#0071e3]/10"
-                              : "border-slate-200/90 bg-white hover:border-slate-300 hover:bg-slate-50/70"
+                              ? "ring-2 ring-[var(--accent-primary)]/60 shadow-lg shadow-[var(--accent-glow)]"
+                              : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] hover:border-[var(--border-hover)]"
                           )}
                           style={{
                             background: isSelected
-                              ? `linear-gradient(135deg, ${t.fromColor}10, ${t.toColor}08)`
+                              ? `linear-gradient(135deg, ${t.fromColor}25, ${t.toColor}15)`
                               : undefined,
                             borderColor: isSelected ? t.borderColor : undefined,
                           }}
@@ -587,14 +587,14 @@ export default function WaitlistForm() {
                           <span
                             className="text-xs font-black tracking-wider uppercase mb-1"
                             style={{
-                              color: isSelected ? t.fromColor : "#1d1d1f",
+                              color: isSelected ? t.fromColor : "var(--text-primary)",
                             }}
                           >
                             {t.name}
                           </span>
 
                           {/* Tagline */}
-                          <span className="text-slate-500 text-[10px] leading-tight font-medium">
+                          <span className="text-[var(--text-muted)] text-[10px] leading-tight font-medium">
                             {t.tagline}
                           </span>
                         </motion.button>
@@ -608,7 +608,7 @@ export default function WaitlistForm() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25 }}
-                    className="p-4 sm:p-5 rounded-2xl border bg-gradient-to-r from-blue-50/50 via-sky-50/30 to-white shadow-xs"
+                    className="p-4 sm:p-5 rounded-2xl border bg-[var(--surface-card)] shadow-xs"
                     style={{ borderColor: selectedTier.borderColor }}
                   >
                     <div className="flex items-start gap-3.5">
@@ -616,14 +616,14 @@ export default function WaitlistForm() {
                         {selectedTier.icon}
                       </span>
                       <div className="space-y-2">
-                        <p className="text-slate-800 text-xs sm:text-sm font-bold leading-snug">
+                        <p className="text-[var(--text-primary)] text-xs sm:text-sm font-bold leading-snug">
                           {selectedTier.description}
                         </p>
                         <div className="flex flex-wrap gap-2 pt-0.5">
                           {selectedTier.examples.map((ex) => (
                             <span
                               key={ex}
-                              className="text-[11px] px-3 py-1 rounded-full font-semibold bg-white border border-slate-200 text-slate-700 shadow-2xs"
+                              className="text-[11px] px-3 py-1 rounded-full font-semibold bg-[var(--surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] shadow-2xs"
                               style={{
                                 borderColor: `${selectedTier.fromColor}40`,
                                 color: selectedTier.fromColor,
@@ -642,7 +642,7 @@ export default function WaitlistForm() {
                     <button
                       type="button"
                       onClick={() => setStep("basics")}
-                      className="px-4 py-3.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+                      className="px-4 py-3.5 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       Back
@@ -654,7 +654,7 @@ export default function WaitlistForm() {
                       disabled={state === "loading"}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#0071e3] via-[#0077ed] to-[#34aadc] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#0071e3]/25 flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-[#0071e3]/35 disabled:opacity-60 disabled:cursor-not-allowed transition-all cursor-pointer"
+                      className="flex-1 py-3.5 px-6 rounded-xl skybazz-cta font-bold text-sm tracking-wide flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-all cursor-pointer"
                     >
                       {state === "loading" ? (
                         <>

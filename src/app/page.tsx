@@ -11,7 +11,7 @@ import WaitlistFooter from "@/components/WaitlistFooter";
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#f5f5f7]">
+    <div className="flex flex-col min-h-screen bg-[var(--canvas-bg)] text-[var(--text-primary)] transition-colors duration-400">
       {/* Landing Page Navigation */}
       <LandingNavbar />
 

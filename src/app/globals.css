@@ -25,94 +25,265 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 }
 
 @theme inline {
-  --color-background: #f5f5f7;
-  --color-foreground: #1d1d1f;
-
-  /* ── Brand Blue Palette ── */
-  --color-brand-50:  #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #0071e3;
-  --color-brand-500: #0062c3;
-  --color-brand-600: #0053a3;
-  --color-brand-700: #004483;
-  --color-brand-800: #003564;
-  --color-brand-900: #002645;
-
-  /* ── Accent ── */
-  --color-accent-400: #5856d6;
-  --color-accent-500: #4744c0;
-
-  /* ── Surfaces ── */
-  --color-apple-off-black: #1d1d1f;
-  --color-app-bg: #f5f5f7;
-  --color-app-cta: #0071e3;
-  --color-apple-blue: #0071e3;
-  --color-apple-border-light: rgba(0,113,227,0.10);
-
-  /* Typography */
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-:root {
-  --background: #f5f5f7;
-  --foreground: #1d1d1f;
+/* ───────────────────────────────────────────────
+   DUAL-THEME DESIGN TOKENS
+   Option A: Aero Titanium & Electric Cobalt (Default)
+   Option B: Obsidian & Champagne Gold
+─────────────────────────────────────────────── */
+
+:root,
+[data-theme="cobalt"] {
+  --canvas-bg: #08090C;
+  --surface-bg: #12141A;
+  --surface-elevated: #181B24;
+  --surface-card: rgba(18, 20, 26, 0.88);
+  --border-stroke: #232733;
+  --border-hover: rgba(59, 130, 246, 0.45);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  
+  --accent-primary: #2563EB;
+  --accent-primary-hover: #1D4ED8;
+  --accent-primary-gradient: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  --accent-glow: rgba(37, 99, 235, 0.4);
+  --accent-secondary: #06B6D4;
+  --accent-secondary-glow: rgba(6, 182, 212, 0.3);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  --cta-bg: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  --cta-shadow: 0 0 24px rgba(37, 99, 235, 0.38), 0 4px 12px rgba(37, 99, 235, 0.2);
+  --cta-text: #FFFFFF;
+
+  --pill-bg: rgba(37, 99, 235, 0.12);
+  --pill-border: rgba(37, 99, 235, 0.28);
+  --pill-text: #60A5FA;
+
+  --card-glow: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.18), transparent 70%);
+  --headline-gradient: linear-gradient(135deg, #F8FAFC 15%, #60A5FA 65%, #06B6D4 100%);
+  
+  --badge-security-bg: rgba(16, 185, 129, 0.12);
+  --badge-security-border: rgba(16, 185, 129, 0.28);
+  --badge-security-text: #34D399;
+
+  --badge-express-bg: rgba(6, 182, 212, 0.12);
+  --badge-express-border: rgba(6, 182, 212, 0.28);
+  --badge-express-text: #22D3EE;
+
+  --badge-support-bg: rgba(59, 130, 246, 0.12);
+  --badge-support-border: rgba(59, 130, 246, 0.28);
+  --badge-support-text: #60A5FA;
+
+  --section-divider-color: linear-gradient(to right, transparent, rgba(37, 99, 235, 0.25), rgba(6, 182, 212, 0.2), transparent);
+}
+
+[data-theme="gold"] {
+  --canvas-bg: #0B0B0D;
+  --surface-bg: #16161A;
+  --surface-elevated: #1F1F24;
+  --surface-card: rgba(22, 22, 26, 0.88);
+  --border-stroke: rgba(212, 175, 55, 0.22);
+  --border-hover: rgba(229, 192, 123, 0.5);
+  --border-subtle: rgba(212, 175, 55, 0.12);
+  
+  --accent-primary: #D4AF37;
+  --accent-primary-hover: #E5C07B;
+  --accent-primary-gradient: linear-gradient(135deg, #E5C07B 0%, #D4AF37 50%, #B89028 100%);
+  --accent-glow: rgba(212, 175, 55, 0.38);
+  --accent-secondary: #F59E0B;
+  --accent-secondary-glow: rgba(245, 158, 11, 0.3);
+
+  --text-primary: #FAF9F6;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+
+  --cta-bg: linear-gradient(135deg, #F5DC9A 0%, #D4AF37 50%, #A68322 100%);
+  --cta-shadow: 0 0 26px rgba(212, 175, 55, 0.4), 0 4px 14px rgba(212, 175, 55, 0.22);
+  --cta-text: #0B0B0D;
+
+  --pill-bg: rgba(212, 175, 55, 0.12);
+  --pill-border: rgba(212, 175, 55, 0.28);
+  --pill-text: #F5D77F;
+
+  --card-glow: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.18), transparent 70%);
+  --headline-gradient: linear-gradient(135deg, #FAF9F6 15%, #E5C07B 65%, #F59E0B 100%);
+  
+  --badge-security-bg: rgba(16, 185, 129, 0.12);
+  --badge-security-border: rgba(16, 185, 129, 0.28);
+  --badge-security-text: #34D399;
+
+  --badge-express-bg: rgba(245, 158, 11, 0.14);
+  --badge-express-border: rgba(245, 158, 11, 0.3);
+  --badge-express-text: #FBBF24;
+
+  --badge-support-bg: rgba(212, 175, 55, 0.14);
+  --badge-support-border: rgba(212, 175, 55, 0.3);
+  --badge-support-text: #F5D77F;
+
+  --section-divider-color: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.3), rgba(245, 158, 11, 0.2), transparent);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--canvas-bg);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ───────────────────────────────────────────────
-   SURFACE TREATMENTS
+   SURFACE TREATMENTS & VISUAL HIERARCHY
 ─────────────────────────────────────────────── */
+
+/* High-Conversion CTA button pop */
+.skybazz-cta,
+.neon-btn {
+  background: var(--cta-bg) !important;
+  color: var(--cta-text) !important;
+  box-shadow: var(--cta-shadow) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 800;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.skybazz-cta:hover,
+.neon-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+  box-shadow: 0 0 32px var(--accent-glow), 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+.skybazz-cta:active,
+.neon-btn:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* Tactical Card Elevation with Chromatic Rim Lighting & Glow Borders */
+.skybazz-card {
+  background: var(--surface-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.skybazz-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.75), 0 0 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Tactical Pill Tags & Category Badges */
+.skybazz-pill {
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  color: var(--pill-text);
+  border-radius: 9999px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem;
+  transition: all 0.25s ease;
+}
+.skybazz-pill:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* Semantic & Trust Badges */
+.skybazz-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+.skybazz-trust-badge.badge-security {
+  background: var(--badge-security-bg);
+  border: 1px solid var(--badge-security-border);
+  color: var(--badge-security-text);
+}
+.skybazz-trust-badge.badge-express {
+  background: var(--badge-express-bg);
+  border: 1px solid var(--badge-express-border);
+  color: var(--badge-express-text);
+}
+.skybazz-trust-badge.badge-support {
+  background: var(--badge-support-bg);
+  border: 1px solid var(--badge-support-border);
+  color: var(--badge-support-text);
+}
+.skybazz-trust-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Theme Iridescent Headline */
+.skybazz-headline-gradient {
+  background: var(--headline-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* Frosted glass card */
 .frosted-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-subtle);
   border-radius: 1.25rem;
-  box-shadow: 0 4px 24px rgba(0, 113, 227, 0.06), 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0,0,0,0.2);
 }
 .frosted-card:hover {
-  border-color: rgba(0, 113, 227, 0.25);
-  box-shadow: 0 8px 40px rgba(0,113,227,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 40px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
 }
 
 /* Legacy glass-card */
 .glass-card {
-  background: rgba(255, 255, 255, 0.80);
+  background: var(--surface-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-subtle);
   border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(0,113,227,0.05);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Blue glow border */
+/* Glow border */
 .glow-border {
-  border: 1px solid rgba(0, 113, 227, 0.25);
-  box-shadow: 0 0 20px rgba(0,113,227,0.08), inset 0 0 20px rgba(0,113,227,0.02);
+  border: 1px solid var(--border-hover);
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px rgba(255, 255, 255, 0.02);
 }
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #0071e3 0%, #5856d6 50%, #34aadc 100%);
+  background: var(--headline-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-warm {
-  background: linear-gradient(135deg, #0062c3 0%, #0071e3 50%, #34aadc 100%);
+  background: var(--headline-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -120,23 +291,10 @@ body {
 
 /* Dark bento card */
 .dark-bento-card {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1d1d1f 50%, #0a0a0a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
   border-radius: 1.5rem;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-}
-
-/* CTA button */
-.neon-btn {
-  background: linear-gradient(135deg, #0071e3 0%, #5856d6 100%);
-  color: #fff;
-  border: 1px solid rgba(0,113,227,0.3);
-  box-shadow: 0 4px 18px rgba(0,113,227,0.25), 0 1px 4px rgba(0,0,0,0.08);
-  transition: all 0.25s ease;
-}
-.neon-btn:hover {
-  box-shadow: 0 8px 28px rgba(0,113,227,0.35), 0 2px 8px rgba(0,0,0,0.10);
-  transform: translateY(-1px) scale(1.015);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
 /* Glow Input */
@@ -237,14 +395,15 @@ body {
 ─────────────────────────────────────────────── */
 .section-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(0,113,227,0.15), rgba(88,86,214,0.12), transparent);
+  background: var(--section-divider-color, linear-gradient(to right, transparent, rgba(37, 99, 235, 0.25), transparent));
+  opacity: 0.8;
 }
 
 /* ───────────────────────────────────────────────
    OUTLINE TEXT (footer wordmark)
 ─────────────────────────────────────────────── */
 .outline-text {
-  -webkit-text-stroke: 2px #1d1d1f;
+  -webkit-text-stroke: 1.5px var(--border-hover, #3b82f6);
   color: transparent;
 }
 

@@ -36,13 +36,13 @@ const TICKER_ITEMS = [
 
 function Marquee() {
   return (
-    <div className="w-full overflow-hidden border-y border-slate-200/80 bg-white/70 py-3 select-none backdrop-blur-md">
+    <div className="w-full overflow-hidden border-y border-[var(--border-subtle)] bg-[var(--surface-elevated)]/60 py-3 select-none backdrop-blur-md">
       <div className="flex gap-8 whitespace-nowrap w-max animate-marquee">
         {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
           <span
             key={i}
             className={`text-[10px] font-extrabold tracking-[0.35em] ${
-              item === "×" ? "text-[#0071e3]" : "text-slate-400"
+              item === "×" ? "text-[var(--accent-primary)]" : "text-[var(--text-muted)]"
             }`}
           >
             {item}
@@ -116,15 +116,15 @@ export default function WaitlistFooter() {
   };
 
   return (
-    <footer id="waitlist" className="relative w-full overflow-hidden bg-[#f5f5f7] text-[#1d1d1f]">
+    <footer id="waitlist" className="relative w-full overflow-hidden bg-[var(--canvas-bg)] text-[var(--text-primary)] transition-colors duration-400">
       {/* Top gradient divider */}
       <div className="absolute inset-x-0 top-0 h-px section-divider" />
 
       {/* Light ambient blobs */}
-      <div className="absolute top-20 -left-32 w-96 h-96 rounded-full pointer-events-none opacity-30 animate-mesh-drift"
-        style={{ background: "radial-gradient(circle, rgba(0,113,227,0.12) 0%, transparent 70%)" }} />
-      <div className="absolute bottom-20 -right-24 w-80 h-80 rounded-full pointer-events-none opacity-25 animate-mesh-drift-2"
-        style={{ background: "radial-gradient(circle, rgba(88,86,214,0.10) 0%, transparent 70%)" }} />
+      <div className="absolute top-20 -left-32 w-96 h-96 rounded-full pointer-events-none opacity-25 animate-mesh-drift"
+        style={{ background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-20 -right-24 w-80 h-80 rounded-full pointer-events-none opacity-20 animate-mesh-drift-2"
+        style={{ background: "radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 70%)" }} />
 
       {/* Marquee ticker */}
       <Marquee />
@@ -142,20 +142,20 @@ export default function WaitlistFooter() {
               transition={{ duration: 0.5 }}
               className="flex items-center gap-2.5 mb-6"
             >
-              <div className="h-px w-8 bg-[#0071e3]/60" />
-              <span className="text-[10px] font-extrabold tracking-[0.4em] uppercase text-[#0071e3]">
+              <div className="h-px w-8 bg-[var(--accent-primary)]/60" />
+              <span className="text-[10px] font-extrabold tracking-[0.4em] uppercase text-[var(--accent-primary)]">
                 The Future of Commerce
               </span>
             </motion.div>
 
             <SplitHeadline
               text="BE READY"
-              className="text-[clamp(2.2rem,7.5vw,7rem)] font-extrabold tracking-tight leading-none text-[#1d1d1f]"
+              className="text-[clamp(2.2rem,7.5vw,7rem)] font-extrabold tracking-tight leading-none text-[var(--text-primary)]"
             />
 
             <SplitHeadline
               text="FOR YOUR"
-              className="text-[clamp(2.2rem,7.5vw,7rem)] font-extrabold tracking-tight leading-none text-slate-300"
+              className="text-[clamp(2.2rem,7.5vw,7rem)] font-extrabold tracking-tight leading-none text-[var(--text-muted)]"
             />
 
             <motion.div
@@ -165,12 +165,7 @@ export default function WaitlistFooter() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="text-[clamp(2.4rem,8.5vw,7.5rem)] font-extrabold tracking-tight leading-none"
             >
-              <span style={{
-                background: "linear-gradient(135deg, #0071e3 0%, #5856d6 50%, #34aadc 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
+              <span className="skybazz-headline-gradient">
                 NEXT.
               </span>
             </motion.div>
@@ -180,7 +175,7 @@ export default function WaitlistFooter() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-[#86868b] text-sm font-medium max-w-sm leading-relaxed pt-3"
+              className="text-[var(--text-secondary)] text-sm font-medium max-w-sm leading-relaxed pt-3"
             >
               A marketplace built for the bold — zero fees, AI-powered sourcing, and global reach from day one.
             </motion.p>
@@ -193,13 +188,13 @@ export default function WaitlistFooter() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.3 }}
-              className="space-y-4 bg-white/80 border border-slate-200/80 p-6 sm:p-8 rounded-3xl backdrop-blur-xl shadow-lg shadow-slate-200/50"
+              className="space-y-4 skybazz-card p-6 sm:p-8"
             >
               <div>
-                <p className="text-[11px] font-extrabold tracking-[0.28em] uppercase text-[#0071e3] mb-1">
+                <p className="text-[11px] font-extrabold tracking-[0.28em] uppercase text-[var(--accent-primary)] mb-1">
                   Get Launch-Day Access
                 </p>
-                <p className="text-[#86868b] text-xs leading-relaxed font-medium">
+                <p className="text-[var(--text-secondary)] text-xs leading-relaxed font-medium">
                   Drop your email and be first in line when we open the doors.
                 </p>
               </div>
@@ -211,14 +206,14 @@ export default function WaitlistFooter() {
                     initial={{ opacity: 0, scale: 0.95, y: 8 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200"
+                    className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400"
                   >
-                    <div className="h-9 w-9 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                    <div className="h-9 w-9 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-emerald-800 font-bold text-sm">You&apos;re in! 🎉</p>
-                      <p className="text-emerald-600 text-xs">We&apos;ll see you at launch.</p>
+                      <p className="font-bold text-sm text-emerald-300">You&apos;re in! 🎉</p>
+                      <p className="text-emerald-400/80 text-xs">We&apos;ll see you at launch.</p>
                     </div>
                   </motion.div>
                 ) : (
@@ -241,15 +236,15 @@ export default function WaitlistFooter() {
                       maxLength={120}
                       autoComplete="email"
                       required
-                      className="w-full py-3.5 px-5 text-sm bg-slate-50 border border-slate-200 text-[#1d1d1f] placeholder:text-slate-400 rounded-2xl focus:outline-none focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 transition-all"
+                      className="w-full py-3.5 px-5 text-sm bg-[var(--surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] rounded-2xl focus:outline-none focus:border-[var(--border-hover)] focus:ring-2 focus:ring-[var(--accent-glow)] transition-all"
                     />
                     {errorMessage && (
-                      <p className="text-xs text-rose-500 font-medium px-1">{errorMessage}</p>
+                      <p className="text-xs text-rose-400 font-medium px-1">{errorMessage}</p>
                     )}
                     <button
                       type="submit"
                       disabled={loading || !email.trim()}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-extrabold text-white text-sm bg-[#0071e3] hover:bg-[#0062c3] shadow-md shadow-[#0071e3]/30 disabled:opacity-40 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-extrabold text-sm skybazz-cta disabled:opacity-40 transition-all cursor-pointer"
                     >
                       {loading ? (
                         <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
@@ -261,7 +256,7 @@ export default function WaitlistFooter() {
                 )}
               </AnimatePresence>
 
-              <p className="text-slate-400 text-[11px] text-center">
+              <p className="text-[var(--text-muted)] text-[11px] text-center">
                 No spam · One email at launch · Free forever
               </p>
             </motion.div>
@@ -283,12 +278,12 @@ export default function WaitlistFooter() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="h-9 w-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-[#0071e3] hover:border-blue-300 hover:shadow-sm hover:-translate-y-0.5 transition-all duration-300"
+                  className="h-9 w-9 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--border-hover)] hover:shadow-sm hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <Icon className="h-3.5 w-3.5" />
                 </a>
               ))}
-              <span className="text-[10px] font-bold text-slate-400 tracking-wider ml-1">FOLLOW US</span>
+              <span className="text-[10px] font-bold text-[var(--text-muted)] tracking-wider ml-1">FOLLOW US</span>
             </motion.div>
           </div>
         </div>
@@ -297,19 +292,17 @@ export default function WaitlistFooter() {
       {/* Full-width wordmark */}
       <div className="relative mt-12 overflow-hidden select-none">
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #f5f5f7, transparent)" }} />
+          style={{ background: "linear-gradient(to right, var(--canvas-bg), transparent)" }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #f5f5f7, transparent)" }} />
+          style={{ background: "linear-gradient(to left, var(--canvas-bg), transparent)" }} />
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2 }}
-          className="text-center font-extrabold tracking-tight leading-none whitespace-nowrap"
+          className="text-center font-extrabold tracking-tight leading-none whitespace-nowrap outline-text"
           style={{
             fontSize: "clamp(3.5rem, 16vw, 16rem)",
-            WebkitTextStroke: "1.5px rgba(0,113,227,0.12)",
-            color: "transparent",
             letterSpacing: "-0.02em",
           }}
         >
@@ -318,24 +311,24 @@ export default function WaitlistFooter() {
       </div>
 
       {/* Bottom legal bar */}
-      <div className="border-t border-slate-200/80 mt-0 bg-white/50">
+      <div className="border-t border-[var(--border-subtle)] mt-0 bg-[var(--surface-elevated)]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-4">
-            <span className="text-[10px] font-extrabold tracking-[0.25em] text-[#1d1d1f] uppercase">SKYBAZZ</span>
-            <span className="text-slate-300 text-xs">·</span>
-            <p className="text-[10px] tracking-widest text-slate-400 font-medium">
+            <span className="text-[10px] font-extrabold tracking-[0.25em] text-[var(--text-primary)] uppercase">SKYBAZZ</span>
+            <span className="text-[var(--text-muted)] text-xs">·</span>
+            <p className="text-[10px] tracking-widest text-[var(--text-muted)] font-medium">
               © {new Date().getFullYear()} ALL RIGHTS RESERVED
             </p>
           </div>
           <div className="flex items-center gap-5">
-            <div className="flex gap-4 text-[10px] tracking-widest text-slate-500 font-medium">
+            <div className="flex gap-4 text-[10px] tracking-widest text-[var(--text-secondary)] font-medium">
               {["PRIVACY", "TERMS", "CONTACT"].map((item) => (
-                <a key={item} href="#" className="hover:text-[#0071e3] transition-colors">{item}</a>
+                <a key={item} href="#" className="hover:text-[var(--accent-primary)] transition-colors">{item}</a>
               ))}
             </div>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200 bg-white hover:border-slate-300 text-[10px] font-extrabold tracking-widest uppercase text-slate-600 hover:text-[#0071e3] transition-all shadow-sm cursor-pointer"
+              className="group flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] hover:border-[var(--border-hover)] text-[10px] font-extrabold tracking-widest uppercase text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-all shadow-sm cursor-pointer"
             >
               TOP
               <ArrowUp className="h-2.5 w-2.5 group-hover:-translate-y-0.5 transition-transform" />

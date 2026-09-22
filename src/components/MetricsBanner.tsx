@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react";
 import InteractiveParticles from "@/components/InteractiveParticles";
 import { supabase } from "@/lib/supabase";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function MetricsBanner() {
+  const { theme } = useTheme();
   const [waitlistCount, setWaitlistCount] = useState<number>(1);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -35,24 +37,27 @@ export default function MetricsBanner() {
     return () => window.removeEventListener("waitlist-updated", handleUpdate);
   }, []);
 
+  const particleColor = theme === "gold" ? "#E5C07B" : "#38BDF8";
+
   return (
     <section
       id="metrics-section"
-      className="relative z-10 w-full h-[580px] sm:h-[650px] md:h-[720px] min-h-[520px] flex items-center justify-center overflow-hidden bg-[#f5f5f7]"
+      className="relative z-10 w-full h-[580px] sm:h-[650px] md:h-[720px] min-h-[520px] flex items-center justify-center overflow-hidden bg-[var(--canvas-bg)] transition-colors duration-400"
     >
-      {/* Subtle ambient lighting matching application theme */}
+      {/* Subtle ambient lighting matching active theme */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(0,113,227,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle at 50% 50%, var(--card-glow), transparent 70%)",
         }}
       />
 
       <InteractiveParticles
+        key={theme}
         waitlistCount={waitlistCount}
         waitlistLabel="IN WAITING LIST"
         background="transparent"
-        color="#0071e3"
+        color={particleColor}
         size={isMobile ? 2.2 : 1.6}
         maxDimension={isMobile ? 140 : 280}
         randomness={isMobile ? 1.4 : 1.8}

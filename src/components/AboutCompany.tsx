@@ -39,13 +39,13 @@ export default function AboutCompany() {
   return (
     <section
       id="about-section"
-      className="relative w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f5f5f7] text-[#1d1d1f] overflow-hidden"
+      className="relative w-full py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 lg:px-20 bg-[var(--canvas-bg)] text-[var(--text-primary)] overflow-hidden transition-colors duration-400"
     >
       {/* Light ambient background blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-40 animate-mesh-drift"
-        style={{ background: "radial-gradient(circle, rgba(0,113,227,0.12) 0%, transparent 70%)" }} />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none opacity-30 animate-mesh-drift-2"
-        style={{ background: "radial-gradient(circle, rgba(88,86,214,0.10) 0%, transparent 70%)" }} />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-25 animate-mesh-drift"
+        style={{ background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none opacity-20 animate-mesh-drift-2"
+        style={{ background: "radial-gradient(circle, var(--accent-secondary-glow) 0%, transparent 70%)" }} />
 
       {/* Top section divider */}
       <div className="absolute top-0 inset-x-0 h-px section-divider" />
@@ -60,31 +60,24 @@ export default function AboutCompany() {
           className="max-w-3xl space-y-3 sm:space-y-4"
         >
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="h-px w-6 sm:w-8 bg-[#0071e3]/60" />
-            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[#0071e3]">
+            <div className="h-px w-6 sm:w-8 bg-[var(--accent-primary)]/60" />
+            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[var(--accent-primary)]">
               About SkyBazz
             </span>
           </div>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.15] text-[#1d1d1f]">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.15] text-[var(--text-primary)]">
             Redefining Online Shopping With{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #0071e3 0%, #5856d6 50%, #34aadc 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="skybazz-headline-gradient">
               Speed, Quality &amp; Care
             </span>
           </h2>
-          <p className="text-[#86868b] text-xs sm:text-base md:text-lg leading-relaxed max-w-2xl font-medium">
+          <p className="text-[var(--text-secondary)] text-xs sm:text-base md:text-lg leading-relaxed max-w-2xl font-medium">
             Built for shoppers who demand excellence, SkyBazz connects you with curated electronics, luxury items, and global lifestyle products — combining quality checks, transparent pricing, and fast doorstep delivery.
           </p>
         </motion.div>
 
         {/* Pillar cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {pillars.map((p, idx) => (
             <motion.div
               key={idx}
@@ -92,13 +85,13 @@ export default function AboutCompany() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative rounded-2xl border border-slate-200/80 bg-white/80 backdrop-blur-xl p-5 sm:p-7 flex flex-col gap-4 sm:gap-5 cursor-default transition-all duration-300 hover:border-blue-200 hover:bg-white shadow-sm hover:shadow-xl"
+              whileHover={{ y: -6 }}
+              className="skybazz-card p-5 sm:p-7 flex flex-col gap-4 sm:gap-5 cursor-default group"
             >
               {/* Glow on hover */}
               <div
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(circle at 50% 0%, ${p.glow}, transparent 70%)` }}
+                style={{ background: `radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 70%)` }}
               />
 
               {/* Icon */}
@@ -110,10 +103,10 @@ export default function AboutCompany() {
 
               {/* Text */}
               <div className="space-y-1.5 sm:space-y-2">
-                <h3 className="font-extrabold text-sm sm:text-base text-[#1d1d1f] leading-snug group-hover:text-[#0071e3] transition-colors">
+                <h3 className="font-extrabold text-sm sm:text-base text-[var(--text-primary)] leading-snug group-hover:text-[var(--accent-primary)] transition-colors">
                   {p.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#86868b] leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed font-normal">
                   {p.description}
                 </p>
               </div>
