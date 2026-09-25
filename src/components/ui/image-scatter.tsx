@@ -50,14 +50,14 @@ export function ImageScatter({
     const gallery = galleryRef.current;
     const galleryHeading = headingRef.current;
 
-    let viewport = {
+    const viewport = {
       centerX: containerRef.current.clientWidth / 2,
       centerY: containerRef.current.clientHeight / 2,
       rangeMin: Math.min(containerRef.current.clientWidth, containerRef.current.clientHeight) * 0.44,
       rangeMax: Math.max(containerRef.current.clientWidth, containerRef.current.clientHeight) * 0.85,
     };
 
-    let state = {
+    const state = {
       activeCards: [] as { element: HTMLDivElement; centerX: number; centerY: number }[],
       currentSection: 0,
       isAnimating: false,
@@ -118,16 +118,23 @@ export function ImageScatter({
 
       if (!sectionData || !sectionData.images.length) return cards;
 
-      sectionData.images.forEach((src) => {
+      const isSmallScreen = (containerRef.current?.clientWidth || window.innerWidth) < 640;
+      const effectiveWidth = isSmallScreen ? Math.round(cardWidth * 0.6) : cardWidth;
+      const effectiveHeight = isSmallScreen ? Math.round(cardHeight * 0.6) : cardHeight;
+      const imagesToRender = isSmallScreen ? sectionData.images.slice(0, 4) : sectionData.images;
+
+      imagesToRender.forEach((src) => {
         const card = document.createElement("div");
         card.className =
-          "absolute rounded-2xl border-4 border-white shadow-[0_25px_50px_rgba(0,0,0,0.3)] overflow-hidden will-change-transform bg-white pointer-events-none";
-        card.style.width = `${cardWidth}px`;
-        card.style.height = `${cardHeight}px`;
+          "absolute rounded-2xl border-2 sm:border-4 border-white shadow-[0_20px_40px_rgba(0,0,0,0.25)] overflow-hidden will-change-transform bg-white pointer-events-none";
+        card.style.width = `${effectiveWidth}px`;
+        card.style.height = `${effectiveHeight}px`;
+
+        card.style.left = "0px";
+        card.style.top = "0px";
 
         const img = document.createElement("img");
         img.src = src;
-        img.loading = "lazy";
         img.className = "w-full h-full object-cover rounded-xl pointer-events-none";
         card.appendChild(img);
 
@@ -137,10 +144,11 @@ export function ImageScatter({
         const centerY = viewport.centerY + Math.sin(angle) * radius;
 
         gsap.set(card, {
-          left: centerX - cardWidth / 2,
-          top: centerY - cardHeight / 2,
+          x: centerX - effectiveWidth / 2,
+          y: centerY - effectiveHeight / 2,
           rotation: Math.random() * 40 - 20,
           opacity: 1,
+          force3D: true,
         });
 
         gallery.appendChild(card);
@@ -180,12 +188,13 @@ export function ImageScatter({
         tl.to(
           element,
           {
-            left: targetEdge.x,
-            top: targetEdge.y,
+            x: targetEdge.x,
+            y: targetEdge.y,
             rotation: Math.random() * 140 - 70,
             opacity: 0,
             duration: animationDuration,
             ease: "power2.in",
+            force3D: true,
             onComplete: () => element.remove(),
           },
           0
@@ -195,21 +204,23 @@ export function ImageScatter({
       enteringCards.forEach(({ element, centerX, centerY }) => {
         const targetEdge = getEdgePosition(centerX, centerY);
         gsap.set(element, {
-          left: targetEdge.x,
-          top: targetEdge.y,
+          x: targetEdge.x,
+          y: targetEdge.y,
           rotation: Math.random() * 140 - 70,
           opacity: 0,
+          force3D: true,
         });
 
         tl.to(
           element,
           {
-            left: centerX - cardWidth / 2,
-            top: centerY - cardHeight / 2,
+            x: centerX - cardWidth / 2,
+            y: centerY - cardHeight / 2,
             rotation: Math.random() * 40 - 20,
             opacity: 1,
             duration: animationDuration,
             ease: "power2.out",
+            force3D: true,
           },
           animationOverlap
         );
@@ -231,8 +242,6 @@ export function ImageScatter({
       gsap.set(galleryHeading, { opacity: 1 });
     }
 
-    let intervalId: NodeJS.Timeout;
-
     function nextSection() {
       if (state.isAnimating) return;
 
@@ -251,7 +260,7 @@ export function ImageScatter({
       });
     }
 
-    intervalId = setInterval(nextSection, interval);
+    const intervalId = setInterval(nextSection, interval);
 
     const handleResize = () => {
       reinitialize();
@@ -263,6 +272,9 @@ export function ImageScatter({
       window.removeEventListener("resize", handleResize);
       clearInterval(intervalId);
       state.activeCards.forEach(({ element }) => element.remove());
+      if (gallery) {
+        gallery.innerHTML = "";
+      }
     };
   }, [data, cardWidth, cardHeight, animationDuration, animationOverlap, headingFadeDuration, showHeading, interval]);
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown, Hand } from "lucide-react";
 
 export default function Hero() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -9,7 +10,6 @@ export default function Hero() {
   const titleY = useTransform(scrollY, [0, 600], [0, 280]);
   const titleScale = useTransform(scrollY, [0, 600], [1, 2.0]);
   const titleOpacity = useTransform(scrollY, [0, 450], [1, 0]);
-  const overlayOpacity = useTransform(scrollY, [0, 400], [0.35, 0.60]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsIntroFinished(true), 2000);
@@ -17,7 +17,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="relative w-full -mt-22 z-10 h-[75vh] sm:h-[85vh] md:h-[calc(100vh+5.5rem)] min-h-[500px]">
+    <div className="relative w-full -mt-22 z-10 h-[calc(100dvh+5.5rem)] min-h-[100dvh]">
       <div id="hero" className="sticky top-0 h-full w-full flex flex-col justify-between overflow-hidden bg-[#1d1d1f]">
 
         {/* Subtle ambient orbs */}
@@ -28,90 +28,111 @@ export default function Hero() {
             style={{ background: "radial-gradient(circle, rgba(88,86,214,0.4) 0%, transparent 70%)" }} />
         </div>
 
-        {/* Background video + overlay */}
+        {/* Background video */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 2.0, ease: "easeOut" }}
           className="absolute inset-0 w-full h-full pointer-events-none"
         >
-          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+          {/* Mobile Video (< 768px): portrait optimized */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="block md:hidden absolute inset-0 w-full h-full object-cover object-center"
+          >
+            <source src="/hero_mobile.mp4" type="video/mp4" />
+          </video>
+
+          {/* Large Screen / Desktop Video (>= 768px): landscape cinematic */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
+          >
             <source src="/hero2.mp4" type="video/mp4" />
           </video>
-          <motion.div style={{ opacity: overlayOpacity }} className="absolute inset-0 bg-black" />
-          {/* Scanline texture */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 3px)", backgroundSize: "100% 3px" }} />
         </motion.div>
 
         {/* Nav spacer */}
         <div className="w-full h-14 sm:h-20 shrink-0" />
 
         {/* Brand wordmark */}
-        <div className={`absolute inset-0 flex flex-col items-center pointer-events-none select-none px-4 ${isIntroFinished ? "justify-end pb-8 sm:pb-16 md:pb-24" : "justify-center"}`}>
+        <div className={`absolute inset-0 flex flex-col items-center pointer-events-none select-none px-4 ${isIntroFinished ? "justify-end pb-10 sm:pb-16 md:pb-24" : "justify-center"}`}>
           <motion.h1
             layout
             initial={{ scale: 0.85, opacity: 0, filter: "blur(12px)" }}
             animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
             transition={{ default: { duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.2 }, layout: { type: "spring", stiffness: 70, damping: 16 } }}
             style={{ y: titleY, scale: titleScale, opacity: titleOpacity }}
-            className={`font-display font-black text-center uppercase tracking-tighter pointer-events-auto cursor-default flex
+            className={`font-display font-black text-center uppercase tracking-tight pointer-events-auto cursor-default flex drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]
               ${isIntroFinished
-                ? "flex-row gap-[0.22em] text-[clamp(2.4rem,8vw,4.2vw)] leading-none"
-                : "flex-col text-[clamp(3.6rem,16vw,12vw)] leading-[0.8]"}`}
+                ? "flex-row gap-[0.22em] text-[clamp(2.2rem,8.5vw,4.2vw)] leading-none"
+                : "flex-col text-[clamp(3.4rem,15vw,12vw)] leading-[0.85]"}`}
           >
-            {["Sky", "Bazz"].map((word, i) => (
+            {["Sky", "Bazz"].map((word) => (
               <motion.span key={word} layout transition={{ type: "spring", stiffness: 70, damping: 16 }} className="inline-block text-white">
                 {word}
               </motion.span>
             ))}
           </motion.h1>
 
+          {/* Scroll Down Indicator with matching SkyBazz blur & spring animation */}
           {isIntroFinished && (
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-2.5 sm:mt-3 text-[11px] sm:text-sm text-white/60 font-medium tracking-[0.18em] sm:tracking-[0.3em] uppercase text-center max-w-xs sm:max-w-none"
+            <motion.div
+              layout
+              initial={{ scale: 0.85, opacity: 0, filter: "blur(12px)", y: 16 }}
+              animate={{ scale: 1, opacity: 1, filter: "blur(0px)", y: 0 }}
+              transition={{
+                default: { duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 },
+                layout: { type: "spring", stiffness: 70, damping: 16 },
+              }}
+              style={{ opacity: titleOpacity }}
+              className="mt-6 sm:mt-8 flex flex-col items-center gap-2 select-none"
             >
-              Next-Gen Shopping · Global Express Delivery
-            </motion.p>
+              <div className="relative flex flex-col items-center">
+                {/* Hand swipe gesture orb with SkyBazz luxury drop-shadow */}
+                <motion.div
+                  animate={{ y: [-3, 3, -3], scale: [0.98, 1.02, 0.98] }}
+                  transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-10 h-10 rounded-full bg-black/45 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_4px_24px_rgba(0,0,0,0.8),0_0_12px_rgba(255,255,255,0.08)]"
+                >
+                  <Hand className="w-4 h-4 text-white/90 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]" strokeWidth={2} />
+                </motion.div>
+
+                {/* Downward chevron glide animation */}
+                <motion.div
+                  animate={{ y: [-2, 4, -2], opacity: [0.35, 1, 0.35] }}
+                  transition={{ duration: 2.0, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-white/85 mt-1"
+                >
+                  <ChevronDown className="w-5 h-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]" strokeWidth={2.5} />
+                </motion.div>
+              </div>
+
+              {/* Text with animated word spans like SkyBazz */}
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-white/75 uppercase tracking-[0.28em] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                {["Scroll", "Down"].map((word) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, filter: "blur(6px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           )}
-
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.8, duration: 1.2 }}
-            className="mt-5 sm:mt-8 flex flex-col items-center gap-1.5 sm:gap-2"
-          >
-            <span className="text-[9px] text-white/30 uppercase tracking-[0.3em] font-bold">Scroll</span>
-            <div className="relative w-5 h-8 rounded-full border border-white/20 flex items-start justify-center pt-1.5">
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-1 h-1.5 rounded-full bg-white/60"
-              />
-            </div>
-          </motion.div>
         </div>
-
-        {/* Bottom row */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 1.0 }}
-          className="relative w-full px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-end"
-        >
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-            className="opacity-40 hover:opacity-80 transition-opacity text-white" aria-label="Instagram">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-            </svg>
-          </a>
-        </motion.footer>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import InteractiveParticles from "@/components/InteractiveParticles";
 import { supabase } from "@/lib/supabase";
 export default function MetricsBanner() {
@@ -47,17 +48,44 @@ export default function MetricsBanner() {
         }}
       />
 
+      {/* Full-width background watermark text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0 px-2 sm:px-4">
+        {/* Soft edge fade masks for seamless horizontal blending */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-12 sm:w-28 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, var(--canvas-bg), transparent)" }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-12 sm:w-28 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, var(--canvas-bg), transparent)" }}
+        />
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2 }}
+          className="w-full text-center font-extrabold tracking-tight leading-none whitespace-nowrap outline-text select-none"
+          style={{
+            fontSize: "clamp(2.4rem, 13.2vw, 14.5rem)",
+            letterSpacing: "-0.02em",
+            opacity: 0.7,
+          }}
+        >
+          WAITING LIST
+        </motion.p>
+      </div>
+
       <InteractiveParticles
         waitlistCount={waitlistCount}
-        waitlistLabel="IN WAITING LIST"
         background="transparent"
-        color="#B89028"
-        size={isMobile ? 2.2 : 1.6}
-        maxDimension={isMobile ? 140 : 280}
-        randomness={isMobile ? 1.4 : 1.8}
-        depth={isMobile ? 2.0 : 3.0}
+        color="#D4AF37"
+        size={isMobile ? 1.4 : 1.5}
+        maxDimension={isMobile ? 260 : 300}
+        randomness={isMobile ? 0.35 : 0.6}
+        depth={isMobile ? 1.4 : 2.5}
         touchRadius={isMobile ? 0.22 : 0.2}
-        className="h-full w-full"
+        className="relative z-10 h-full w-full"
       />
     </section>
   );

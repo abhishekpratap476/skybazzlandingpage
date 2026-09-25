@@ -9,62 +9,62 @@ export default function CompanyServices() {
   const services = [
     {
       id: "01",
-      badge: "SMART AI",
+      badge: "AI DISCOVERY",
       icon: <Search className="w-5 h-5" />,
       title: "Curated Product Discovery",
-      subtitle: "Smart Search & Instant Inventory",
-      description: "Discover top-tier electronics, horology, lifestyle essentials, and luxury items with real-time stock and instant search.",
-      highlights: ["Authentic Product Catalog", "Curated Tech & Luxury", "Instant Search"],
+      subtitle: "Smart Search & Intuitive Catalog",
+      description: "Exploring intuitive browsing pathways across lifestyle, electronics, and specialty goods with smart catalog categorization.",
+      highlights: ["Curated Product Selections", "Intelligent Search Models", "Category Exploration"],
       color: "from-blue-600 to-cyan-500",
       glow: "var(--accent-glow)",
     },
     {
       id: "02",
-      badge: "VERIFIED AUTHENTIC",
+      badge: "QUALITY BENCHMARK",
       icon: <ShieldCheck className="w-5 h-5 text-emerald-300" />,
-      title: "100% Quality & Authenticity",
-      description: "Every item undergoes rigorous multi-point physical checks before packaging to guarantee 100% genuine brand quality.",
-      highlights: ["Zero Replica Guarantee", "Verified Quality Inspection", "Sealed Product Dispatch"],
+      title: "Quality & Sourcing Standards",
+      description: "Developing multi-point review criteria and seller verification standards to prioritize genuine quality and customer confidence.",
+      highlights: ["Multi-Point Review Criteria", "Seller Verification Framework", "Secure Packaging Guidelines"],
       color: "from-emerald-600 to-teal-500",
       glow: "rgba(16, 185, 129, 0.25)",
     },
     {
       id: "03",
-      badge: "EXPRESS AIR",
+      badge: "LOGISTICS NETWORK",
       icon: <Plane className="w-5 h-5" />,
-      title: "Express Doorstep Air Delivery",
-      description: "Priority air courier corridors linking international logistics hubs directly to your doorstep with real-time GPS tracking.",
-      highlights: ["Same-Day Dispatch", "Live Order Tracking", "Worldwide Express Shipping"],
+      title: "Global Logistics Framework",
+      description: "Structuring international transit routes designed to connect cross-border hubs with dependable last-mile delivery.",
+      highlights: ["Connected Air Corridors", "End-to-End Tracking Blueprint", "International Delivery Routes"],
       color: "from-sky-600 to-blue-500",
       glow: "var(--accent-secondary-glow)",
     },
     {
       id: "04",
-      badge: "BANK SECURE",
+      badge: "CHECKOUT SECURITY",
       icon: <CreditCard className="w-5 h-5" />,
-      title: "Secure & Flexible Checkout",
-      description: "Protected by bank-level 256-bit encryption with multiple secure payment methods and instant invoice generation.",
-      highlights: ["256-bit Bank Encryption", "Multiple Payment Options", "Transparent Pricing"],
+      title: "Protected Payment Architecture",
+      description: "Integrating industry-standard encrypted transaction protocols with versatile payment options and clear pricing.",
+      highlights: ["Industry-Standard Encryption", "Flexible Payment Gateways", "Transparent Fee Structure"],
       color: "from-indigo-600 to-blue-600",
       glow: "var(--accent-glow)",
     },
     {
       id: "05",
-      badge: "24/7 DEDICATED",
+      badge: "CLIENT SUPPORT",
       icon: <Headphones className="w-5 h-5" />,
-      title: "24/7 Dedicated Customer Care",
-      description: "Friendly customer support specialists available round-the-clock to assist with orders, sizing, and shipping inquiries.",
-      highlights: ["Live Chat & Email Support", "Sub-1hr Response Time", "Dedicated Support Desk"],
+      title: "Dedicated Support Channels",
+      description: "Building responsive customer guidance systems to help shoppers with inquiries, order navigation, and product details.",
+      highlights: ["Multichannel Assistance", "Clear Guidance & FAQs", "Dedicated Support Desk"],
       color: "from-cyan-600 to-blue-600",
       glow: "var(--accent-secondary-glow)",
     },
     {
       id: "06",
-      badge: "BUYER SHIELD",
+      badge: "BUYER ASSURANCE",
       icon: <ShoppingBag className="w-5 h-5" />,
-      title: "Order Protection & Buyer Security",
-      description: "Enjoy complete peace of mind with order protection, full refund guarantees, and total buyer security on every item.",
-      highlights: ["Order Protection Guarantee", "Full Money-Back Guarantee", "Total Buyer Security"],
+      title: "Buyer Assurance Framework",
+      description: "Establishing clear buyer safeguards, dispute resolution guidelines, and order verification for a trustworthy experience.",
+      highlights: ["Transparent Order Guidelines", "Buyer Protection Protocols", "Verified Transaction Flow"],
       color: "from-purple-600 to-indigo-600",
       glow: "rgba(168,85,247,0.2)",
     },
@@ -98,13 +98,13 @@ export default function CompanyServices() {
             <div className="flex items-center gap-2.5 sm:gap-3">
               <div className="h-px w-6 sm:w-8 bg-[var(--accent-primary)]/60" />
               <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[var(--accent-primary)]">
-                Our Capabilities
+                Platform Blueprint
               </span>
             </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.12] text-[var(--text-primary)]">
-              Seamless Shopping,{" "}
+              Designed for Tomorrow&apos;s{" "}
               <span className="skybazz-headline-gradient">
-                Unmatched Quality
+                Global Commerce
               </span>
             </h2>
           </motion.div>
@@ -115,7 +115,7 @@ export default function CompanyServices() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-[var(--text-secondary)] text-xs sm:text-sm max-w-md leading-relaxed font-medium"
           >
-            From single item purchases to curated collection orders, SkyBazz delivers an end-to-end premium shopping experience.
+            Currently in pre-release preparation, SkyBazz is developing an interconnected shopping experience focused on quality standards, smart navigation, and reliable global fulfillment.
           </motion.p>
         </div>
 
@@ -193,11 +193,11 @@ export default function CompanyServices() {
 
           <div className="relative z-10 space-y-2 text-center md:text-left">
             <span className="text-[var(--accent-primary)] font-extrabold text-[10px] sm:text-xs uppercase tracking-[0.3em] block">
-              Support &amp; Guidance
+              Early Access &amp; Inquiries
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] tracking-tight">Have Questions About Your Order?</h3>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] tracking-tight">Be Part of Our Launch Journey</h3>
             <p className="text-[var(--text-secondary)] text-xs sm:text-sm max-w-xl leading-relaxed font-medium">
-              Connect with our team for order tracking, product guidance, and custom delivery assistance.
+              Join early testers, explore platform previews, and secure your place in the priority queue before public launch.
             </p>
           </div>
           <Link

@@ -94,8 +94,8 @@ void main() {
   displaced.x += cos(angle) * t * 20.0 * rndz;
   displaced.y += sin(angle) * t * 20.0 * rndz;
 
-  float psize = (snoise(vec2(uTime, pindex) * 0.5) + 2.0);
-  psize *= max(grey, 0.2);
+  float psize = (snoise(vec2(uTime * 0.4, pindex * 0.05)) * 0.25 + 1.8);
+  psize *= max(grey, 0.4);
   psize *= uSize;
 
   vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
@@ -122,15 +122,15 @@ void main() {
   vec4 colA = texture2D(uTexture, puv);
   float grey = colA.r * 0.21 + colA.g * 0.71 + colA.b * 0.07;
 
-  // Soft, feathered dot instead of a hard-edged circle.
+  // Crisp, well-defined micro-dots instead of muddy fuzzy blur
   float radius = 0.5;
-  float border = 0.45;
+  float border = 0.12;
   float dist = radius - distance(uv, vec2(0.5));
   float t = smoothstep(0.0, border, dist);
 
-  // Tint with uColor and blend opacity
-  vec3 rgb = vec3(grey) * uColor;
-  float alpha = t * (0.4 + 0.6 * grey);
+  // Vibrant gold color without muddy grey blend
+  vec3 rgb = uColor;
+  float alpha = t * min(grey * 1.25, 1.0);
 
   gl_FragColor = vec4(rgb, alpha);
 }
@@ -210,11 +210,33 @@ class TouchTexture {
 /**
  * Creates high-contrast raster texture with the live waitlist count and label
  */
-function createWaitlistTextImage(countText: string, subtext: string = "IN WAITING LIST"): string {
+function createWaitlistTextImage(countText: string, subtext: string = ""): string {
   if (typeof window === "undefined") return "";
+  const hasSubtext = Boolean(subtext && subtext.trim());
+
+  let canvasWidth = 560;
+  let canvasHeight = 360;
+  let fontSize = 160;
+
+  if (!hasSubtext) {
+    if (countText.length <= 2) {
+      canvasWidth = 360;
+      canvasHeight = 360;
+      fontSize = 240;
+    } else if (countText.length <= 4) {
+      canvasWidth = 460;
+      canvasHeight = 360;
+      fontSize = 200;
+    } else {
+      canvasWidth = 580;
+      canvasHeight = 360;
+      fontSize = 160;
+    }
+  }
+
   const canvas = document.createElement("canvas");
-  canvas.width = 560;
-  canvas.height = 320;
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
   const ctx = canvas.getContext("2d");
   if (!ctx) return "";
 
@@ -228,13 +250,19 @@ function createWaitlistTextImage(countText: string, subtext: string = "IN WAITIN
   ctx.textBaseline = "middle";
 
   // Large bold count typography
-  ctx.font = "900 155px -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif";
-  ctx.fillText(countText, canvas.width / 2, canvas.height / 2 - 32);
+  ctx.font = `900 ${fontSize}px -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, sans-serif`;
+  ctx.fillText(
+    countText,
+    canvas.width / 2,
+    hasSubtext ? canvas.height / 2 - 32 : canvas.height / 2
+  );
 
-  // Subtitle
-  ctx.font = "700 24px -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, sans-serif";
-  ctx.letterSpacing = "6px";
-  ctx.fillText(subtext.toUpperCase(), canvas.width / 2, canvas.height / 2 + 68);
+  // Subtitle (only rendered if provided)
+  if (hasSubtext) {
+    ctx.font = "700 24px -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, sans-serif";
+    ctx.letterSpacing = "6px";
+    ctx.fillText(subtext.trim().toUpperCase(), canvas.width / 2, canvas.height / 2 + 68);
+  }
 
   return canvas.toDataURL("image/png");
 }
@@ -244,7 +272,7 @@ export interface InteractiveParticlesProps {
   src?: string;
   /** Actual count of users from the waitinglist table */
   waitlistCount?: number | string;
-  /** Subtitle label beneath the number (defaults to "IN WAITING LIST") */
+  /** Subtitle label beneath the number (optional) */
   waitlistLabel?: string;
   /** Longest edge sampled (caps particle count). Defaults to 320. */
   maxDimension?: number;
@@ -269,7 +297,7 @@ export interface InteractiveParticlesProps {
 export function InteractiveParticles({
   src,
   waitlistCount = 1,
-  waitlistLabel = "IN WAITING LIST",
+  waitlistLabel = "",
   maxDimension = 320,
   className,
   background = "transparent",
@@ -412,7 +440,7 @@ export function InteractiveParticles({
 
       const longest = Math.max(image.width, image.height);
       const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
-      const effectiveMaxDim = maxDimension ? maxDimension : (isMobileDevice ? 140 : 280);
+      const effectiveMaxDim = maxDimension ? maxDimension : (isMobileDevice ? 260 : 300);
       const scaleDown = longest > effectiveMaxDim ? effectiveMaxDim / longest : 1;
       imgWidth = Math.max(1, Math.round(image.width * scaleDown));
       imgHeight = Math.max(1, Math.round(image.height * scaleDown));

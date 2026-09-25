@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, ShieldCheck, Plane, Headphones } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 function SplitWords({ text, delay = 0 }: { text: string; delay?: number }) {
   return (
@@ -33,27 +33,6 @@ export default function CompanyHero() {
     visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
   };
 
-  const bullets = [
-    {
-      text: "100% Authentic Quality Guarantee",
-      icon: ShieldCheck,
-      type: "badge-security",
-      iconColor: "text-emerald-400",
-    },
-    {
-      text: "Fast Doorstep Express Shipping",
-      icon: Plane,
-      type: "badge-express",
-      iconColor: "text-[var(--accent-secondary)]",
-    },
-    {
-      text: "24/7 Dedicated Customer Care",
-      icon: Headphones,
-      type: "badge-support",
-      iconColor: "text-[var(--accent-primary)]",
-    },
-  ];
-
   return (
     <section id="company-hero" className="relative min-h-[85vh] sm:min-h-[92vh] flex flex-col justify-center overflow-hidden bg-[var(--canvas-bg)] text-[var(--text-primary)] pt-20 sm:pt-28 pb-14 sm:pb-16 px-4 sm:px-6 md:px-12 lg:px-20 transition-colors duration-400">
       {/* Light ambient orbs */}
@@ -76,7 +55,7 @@ export default function CompanyHero() {
 
           <motion.div variants={itemVariants} className="flex items-center gap-2.5 sm:gap-3">
             <div className="h-px w-6 sm:w-8 bg-[var(--accent-primary)]/50" />
-            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[var(--accent-primary)]">Enterprise Commerce</span>
+            <span className="text-[10px] sm:text-xs font-extrabold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-[var(--accent-primary)]">Early Access &bull; Launch Preview</span>
             <div className="h-px w-6 sm:w-8 bg-[var(--accent-primary)]/50" />
           </motion.div>
 
@@ -110,7 +89,7 @@ export default function CompanyHero() {
           </motion.div>
 
           <motion.p variants={itemVariants} className="text-[var(--text-secondary)] text-xs sm:text-base md:text-lg font-medium leading-relaxed max-w-xl px-2 sm:px-0">
-            Curated electronics, lifestyle essentials, and premium goods delivered worldwide with express doorstep shipping.
+            We&apos;re building a next-generation shopping experience to discover and access products worldwide. Join our early waitlist to receive preview access and launch updates.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4 pt-1 sm:pt-2 w-full sm:w-auto px-4 sm:px-0">
@@ -118,19 +97,6 @@ export default function CompanyHero() {
               <span>Join Priority Waitlist</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          </motion.div>
-
-          {/* Semantic & Trust Badge Accents */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 pt-2">
-            {bullets.map((b, i) => {
-              const IconComponent = b.icon;
-              return (
-                <div key={i} className={`skybazz-trust-badge ${b.type}`}>
-                  <IconComponent className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${b.iconColor} shrink-0`} />
-                  <span className="text-[11px] sm:text-xs font-semibold">{b.text}</span>
-                </div>
-              );
-            })}
           </motion.div>
         </motion.div>
       </div>

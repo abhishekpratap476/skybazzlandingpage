@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { ArrowUp, ArrowRight, CheckCircle2 } from "lucide-react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { supabase } from "@/lib/supabase";
+import { useRef } from "react";
+import Link from "next/link";
+import { ArrowUp, ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -74,47 +74,6 @@ function SplitHeadline({ text, className }: { text: string; className?: string }
 }
 
 export default function WaitlistFooter() {
-  const [email, setEmail]           = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-  const [loading, setLoading]       = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const cleanEmail = email.trim().toLowerCase();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!cleanEmail || !emailRegex.test(cleanEmail) || cleanEmail.length > 120) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-    setErrorMessage("");
-    setLoading(true);
-    try {
-      const waitlistUserId = crypto.randomUUID();
-      const { error } = await supabase.from("waitinglist").upsert({
-        id: waitlistUserId,
-        email: cleanEmail,
-        full_name: "Waitlist Member",
-        is_active: true,
-        company: "Skybazz Logistics Corp",
-        updated_at: new Date().toISOString(),
-      });
-      if (error) {
-        console.warn("Footer waitlist submit notice:", error.message);
-      }
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("waitlist-updated"));
-      }
-      setSubscribed(true);
-      setEmail("");
-      setTimeout(() => setSubscribed(false), 6000);
-    } catch (err) {
-      console.warn("Footer waitlist submit error:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <footer id="waitlist" className="relative w-full overflow-hidden bg-[var(--canvas-bg)] text-[var(--text-primary)] transition-colors duration-400">
       {/* Top gradient divider */}
@@ -181,84 +140,34 @@ export default function WaitlistFooter() {
             </motion.p>
           </div>
 
-          {/* RIGHT: Email form + socials */}
-          <div className="space-y-8 lg:pb-8">
+          {/* RIGHT: Waiting List CTA button + socials */}
+          <div className="space-y-8 lg:pb-8 flex flex-col items-start lg:items-end">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.3 }}
-              className="space-y-4 skybazz-card p-6 sm:p-8"
+              className="w-full sm:w-auto"
             >
-              <div>
-                <p className="text-[11px] font-extrabold tracking-[0.28em] uppercase text-[var(--accent-primary)] mb-1">
-                  Get Launch-Day Access
-                </p>
-                <p className="text-[var(--text-secondary)] text-xs leading-relaxed font-medium">
-                  Drop your email and be first in line when we open the doors.
-                </p>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {subscribed ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95, y: 8 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400"
-                  >
-                    <div className="h-9 w-9 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-sm text-emerald-300">You&apos;re in! 🎉</p>
-                      <p className="text-emerald-400/80 text-xs">We&apos;ll see you at launch.</p>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex flex-col gap-2.5"
-                  >
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        if (errorMessage) setErrorMessage("");
-                      }}
-                      placeholder="your@email.com"
-                      maxLength={120}
-                      autoComplete="email"
-                      required
-                      className="w-full py-3.5 px-5 text-sm bg-[var(--surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] rounded-2xl focus:outline-none focus:border-[var(--border-hover)] focus:ring-2 focus:ring-[var(--accent-glow)] transition-all"
-                    />
-                    {errorMessage && (
-                      <p className="text-xs text-rose-400 font-medium px-1">{errorMessage}</p>
-                    )}
-                    <button
-                      type="submit"
-                      disabled={loading || !email.trim()}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-extrabold text-sm skybazz-cta disabled:opacity-40 transition-all cursor-pointer"
-                    >
-                      {loading ? (
-                        <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                      ) : (
-                        <>Reserve Early Access <ArrowRight className="h-4 w-4" /></>
-                      )}
-                    </button>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-
-              <p className="text-[var(--text-muted)] text-[11px] text-center">
-                No spam · One email at launch · Free forever
-              </p>
+              <Link
+                id="footer-waitlist-btn"
+                href="/waitlist"
+                onClick={(e) => {
+                  if (typeof window !== "undefined" && window.location.pathname.startsWith("/waitlist")) {
+                    e.preventDefault();
+                    const card = document.getElementById("waitlist-card");
+                    if (card) {
+                      card.scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }
+                }}
+                className="group relative inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-4.5 rounded-2xl skybazz-cta font-extrabold text-sm sm:text-base tracking-wide shadow-xl hover:shadow-2xl transition-all cursor-pointer w-full sm:w-auto text-center"
+              >
+                <span>Join Waiting List</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </motion.div>
 
             {/* Socials */}
